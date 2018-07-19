@@ -23,12 +23,18 @@ class App extends React.Component {
 	}
 
 	render() {
+
+		let activeStyles = {
+			backgroundColor: 'red',
+		  };
+
 		return (
 			<Pager
 				total={this.state.total}
 				current={this.state.current}
 				visiblePages={this.state.visiblePage}
 				titles={{ first: '<|', last: '|>' }}
+				activeStyle={activeStyles}
 				onPageChanged={this.handlePageChanged}
 			/>
 		);

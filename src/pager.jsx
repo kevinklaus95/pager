@@ -188,7 +188,6 @@ class Pager extends React.Component {
 
 
 	render() {
-		console.error(this.props)
 		const titles = this.getTitles.bind(this);
 		let className = "pagination";
 		if (this.props.className) {
@@ -267,7 +266,6 @@ Pager.defaultProps = {
 
 
 const Page = (props) => {
-	console.error(props)
 	if (props.isHidden) return null;
 
 	const baseCss = props.className ? `${props.className} ` : '';
