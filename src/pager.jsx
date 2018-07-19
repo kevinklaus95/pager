@@ -179,6 +179,7 @@ class Pager extends React.Component {
 					index={idx}
 					isActive={isActive}
 					className="btn-numbered-page"
+					style={isActive ? this.props.activeStyle : this.props.style}
 					onClick={onClick}
 				>{num}</Page>
 			);
@@ -201,6 +202,7 @@ class Pager extends React.Component {
 						key="btn-first-page"
 						isDisabled={this.isPrevDisabled()}
 						onClick={this.handleFirstPage}
+						style={this.props.style}
 					>{titles('first')}</Page>
 
 					<Page
@@ -208,6 +210,7 @@ class Pager extends React.Component {
 						key="btn-prev-page"
 						isDisabled={this.isPrevDisabled()}
 						onClick={this.handlePreviousPage}
+						style={this.props.style}
 					>{titles('prev')}</Page>
 
 					<Page
@@ -215,6 +218,7 @@ class Pager extends React.Component {
 						key="btn-prev-more"
 						isHidden={this.isPrevMoreHidden()}
 						onClick={this.handleMorePrevPages}
+						style={this.props.style}
 					>{titles('prevSet')}</Page>
 
 					{this.renderPages(this.visibleRange())}
@@ -224,6 +228,7 @@ class Pager extends React.Component {
 						key="btn-next-more"
 						isHidden={this.isNextMoreHidden()}
 						onClick={this.handleMoreNextPages}
+						style={this.props.style}
 					>{titles('nextSet')}</Page>
 
 					<Page
@@ -231,6 +236,7 @@ class Pager extends React.Component {
 						key="btn-next-page"
 						isDisabled={this.isNextDisabled()}
 						onClick={this.handleNextPage}
+						style={this.props.style}
 					>{titles('next')}</Page>
 
 					<Page
@@ -238,6 +244,7 @@ class Pager extends React.Component {
 						key="btn-last-page"
 						isDisabled={this.isNextDisabled()}
 						onClick={this.handleLastPage}
+						style={this.props.style}
 					>{titles('last')}</Page>
 				</ul>
 			</nav>
@@ -265,8 +272,8 @@ const Page = (props) => {
 	const fullCss = `${baseCss}${props.isActive ? ' active' : ''}${props.isDisabled ? ' disabled' : ''}`;
 
 	return (
-		<li key={props.index} className={fullCss}>
-			<a onClick={props.onClick}>{props.children}</a>
+		<li key={props.index} className={fullCss} style={this.props.style}>
+			<a style={this.props.style} onClick={props.onClick}>{props.children}</a>
 		</li>
 	);
 };
@@ -276,6 +283,8 @@ Page.propTypes = {
 	isActive:   PropTypes.bool,
 	isDisabled: PropTypes.bool,
 	className:  PropTypes.string,
+	activeStyle: PropTypes.object,
+	style: PropTypes.object,
 	onClick:    PropTypes.func,
 };
 
