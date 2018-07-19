@@ -272,7 +272,7 @@ const Page = (props) => {
 	const fullCss = `${baseCss}${props.isActive ? ' active' : ''}${props.isDisabled ? ' disabled' : ''}`;
 
 	return (
-		<li key={props.index} className={fullCss} style={props.style}>
+		<li key={props.index} className={fullCss}>
 			<a style={props.style} onClick={props.onClick}>{props.children}</a>
 		</li>
 	);
