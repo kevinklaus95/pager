@@ -183,7 +183,7 @@ class Pager extends React.Component {
 					index={idx}
 					isActive={isActive}
 					className="btn-numbered-page"
-					style={isActive ? this.props.activeStyle : this.state.hovered === num ? this.props.hoverStyle : this.props.style}
+					style={isActive ? this.props.activeStyle : this.state.hovered === num && isActive ? this.props.hoverStyle : this.props.style}
 					onMouseLeave={() => {this.setState({hovered: ''})}}
 					onMouseOver={() => {this.setState({hovered: num})}}
 					onClick={onClick}
@@ -209,7 +209,7 @@ class Pager extends React.Component {
 						key="btn-first-page"
 						isDisabled={this.isPrevDisabled()}
 						onClick={this.handleFirstPage}
-						style={this.state.hovered === 'first-page' ? this.props.hoverStyle : this.props.style}
+						style={this.state.hovered === 'first-page' && !this.isPrevDisabled() ? this.props.hoverStyle : this.props.style}
 						onMouseOver={() => {this.setState({hovered: 'first-page'})}}
 						onMouseLeave={() => {this.setState({hovered: ''})}}
 					>{titles('first')}</Page>
@@ -219,7 +219,7 @@ class Pager extends React.Component {
 						key="btn-prev-page"
 						isDisabled={this.isPrevDisabled()}
 						onClick={this.handlePreviousPage}
-						style={this.state.hovered === 'prev-page' ? this.props.hoverStyle : this.props.style}
+						style={this.state.hovered === 'prev-page' && !this.isPrevDisabled() ? this.props.hoverStyle : this.props.style}
 						onMouseOver={() => {this.setState({hovered: 'prev-page'})}}
 						onMouseLeave={() => {this.setState({hovered: ''})}}
 					>{titles('prev')}</Page>
@@ -229,7 +229,7 @@ class Pager extends React.Component {
 						key="btn-prev-more"
 						isHidden={this.isPrevMoreHidden()}
 						onClick={this.handleMorePrevPages}
-						style={this.state.hovered === 'prev-more' ? this.props.hoverStyle : this.props.style}
+						style={this.state.hovered === 'prev-more' && !this.isPrevMoreHidden() ? this.props.hoverStyle : this.props.style}
 						onMouseOver={() => {this.setState({hovered: 'prev-more'})}}
 						onMouseLeave={() => {this.setState({hovered: ''})}}
 					>{titles('prevSet')}</Page>
@@ -241,7 +241,7 @@ class Pager extends React.Component {
 						key="btn-next-more"
 						isHidden={this.isNextMoreHidden()}
 						onClick={this.handleMoreNextPages}
-						style={this.state.hovered === 'next-more' ? this.props.hoverStyle : this.props.style}
+						style={this.state.hovered === 'next-more' && !this.isNextMoreHidden() ? this.props.hoverStyle : this.props.style}
 						onMouseOver={() => {this.setState({hovered: 'next-more'})}}
 						onMouseLeave={() => {this.setState({hovered: ''})}}
 					>{titles('nextSet')}</Page>
@@ -251,7 +251,7 @@ class Pager extends React.Component {
 						key="btn-next-page"
 						isDisabled={this.isNextDisabled()}
 						onClick={this.handleNextPage}
-						style={this.state.hovered === 'next-page' ? this.props.hoverStyle : this.props.style}
+						style={this.state.hovered === 'next-page' && !this.isNextDisabled() ? this.props.hoverStyle : this.props.style}
 						onMouseOver={() => {this.setState({hovered: 'next-page'})}}
 						onMouseLeave={() => {this.setState({hovered: ''})}}
 					>{titles('next')}</Page>
@@ -261,7 +261,7 @@ class Pager extends React.Component {
 						key="btn-last-page"
 						isDisabled={this.isNextDisabled()}
 						onClick={this.handleLastPage}
-						style={this.state.hovered === 'last-page' ? this.props.hoverStyle : this.props.style}
+						style={this.state.hovered === 'last-page' && !this.isNextDisabled() ? this.props.hoverStyle : this.props.style}
 						onMouseOver={() => {this.setState({hovered: 'last-page'})}}
 						onMouseLeave={() => {this.setState({hovered: ''})}}
 					>{titles('last')}</Page>
