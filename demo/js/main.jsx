@@ -22,12 +22,10 @@ class App extends React.Component {
 		this.setState({ current : newPage });
 	}
 
-	render() {
-
-		let activeStyles = {
-			backgroundColor: 'red',
-		  };
-
+    render() {
+        const activeStyles = {
+            backgroundColor: 'red',
+        };
 		return (
 			<Pager
 				total={this.state.total}
@@ -35,6 +33,7 @@ class App extends React.Component {
 				visiblePages={this.state.visiblePage}
 				titles={{ first: '<|', last: '|>' }}
 				activeStyle={activeStyles}
+				hoverStyle={{backgroundColor: 'blue'}}
 				onPageChanged={this.handlePageChanged}
 			/>
 		);

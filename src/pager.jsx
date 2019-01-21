@@ -58,6 +58,10 @@ class Pager extends React.Component {
 		this.handleMorePrevPages = this.handleMorePrevPages.bind(this);
 		this.handleMoreNextPages = this.handleMoreNextPages.bind(this);
 		this.handlePageChanged   = this.handlePageChanged.bind(this);
+		this.state = {
+			hovered: null
+		}
+
 	}
 
     /* ========================= HELPERS ==============================*/
@@ -179,7 +183,9 @@ class Pager extends React.Component {
 					index={idx}
 					isActive={isActive}
 					className="btn-numbered-page"
-					style={isActive ? this.props.activeStyle : this.props.style}
+					style={isActive ? this.props.activeStyle : this.state.hovered === num ? this.props.hoverStyle : this.props.style}
+					onMouseLeave={() => {this.setState({hovered: ''})}}
+					onMouseOver={() => {this.setState({hovered: num})}}
 					onClick={onClick}
 				>{num}</Page>
 			);
@@ -188,6 +194,7 @@ class Pager extends React.Component {
 
 
 	render() {
+		console.error(this.state)
 		const titles = this.getTitles.bind(this);
 		let className = "pagination";
 		if (this.props.className) {
@@ -202,7 +209,9 @@ class Pager extends React.Component {
 						key="btn-first-page"
 						isDisabled={this.isPrevDisabled()}
 						onClick={this.handleFirstPage}
-						style={this.props.style}
+						style={this.state.hovered === 'first-page' ? this.props.hoverStyle : this.props.style}
+						onMouseOver={() => {this.setState({hovered: 'first-page'})}}
+						onMouseLeave={() => {this.setState({hovered: ''})}}
 					>{titles('first')}</Page>
 
 					<Page
@@ -210,7 +219,9 @@ class Pager extends React.Component {
 						key="btn-prev-page"
 						isDisabled={this.isPrevDisabled()}
 						onClick={this.handlePreviousPage}
-						style={this.props.style}
+						style={this.state.hovered === 'prev-page' ? this.props.hoverStyle : this.props.style}
+						onMouseOver={() => {this.setState({hovered: 'prev-page'})}}
+						onMouseLeave={() => {this.setState({hovered: ''})}}
 					>{titles('prev')}</Page>
 
 					<Page
@@ -218,7 +229,9 @@ class Pager extends React.Component {
 						key="btn-prev-more"
 						isHidden={this.isPrevMoreHidden()}
 						onClick={this.handleMorePrevPages}
-						style={this.props.style}
+						style={this.state.hovered === 'prev-more' ? this.props.hoverStyle : this.props.style}
+						onMouseOver={() => {this.setState({hovered: 'prev-more'})}}
+						onMouseLeave={() => {this.setState({hovered: ''})}}
 					>{titles('prevSet')}</Page>
 
 					{this.renderPages(this.visibleRange())}
@@ -228,7 +241,9 @@ class Pager extends React.Component {
 						key="btn-next-more"
 						isHidden={this.isNextMoreHidden()}
 						onClick={this.handleMoreNextPages}
-						style={this.props.style}
+						style={this.state.hovered === 'next-more' ? this.props.hoverStyle : this.props.style}
+						onMouseOver={() => {this.setState({hovered: 'next-more'})}}
+						onMouseLeave={() => {this.setState({hovered: ''})}}
 					>{titles('nextSet')}</Page>
 
 					<Page
@@ -236,7 +251,9 @@ class Pager extends React.Component {
 						key="btn-next-page"
 						isDisabled={this.isNextDisabled()}
 						onClick={this.handleNextPage}
-						style={this.props.style}
+						style={this.state.hovered === 'next-page' ? this.props.hoverStyle : this.props.style}
+						onMouseOver={() => {this.setState({hovered: 'next-page'})}}
+						onMouseLeave={() => {this.setState({hovered: ''})}}
 					>{titles('next')}</Page>
 
 					<Page
@@ -244,7 +261,9 @@ class Pager extends React.Component {
 						key="btn-last-page"
 						isDisabled={this.isNextDisabled()}
 						onClick={this.handleLastPage}
-						style={this.props.style}
+						style={this.state.hovered === 'last-page' ? this.props.hoverStyle : this.props.style}
+						onMouseOver={() => {this.setState({hovered: 'last-page'})}}
+						onMouseLeave={() => {this.setState({hovered: ''})}}
 					>{titles('last')}</Page>
 				</ul>
 			</nav>
@@ -270,10 +289,9 @@ const Page = (props) => {
 
 	const baseCss = props.className ? `${props.className} ` : '';
 	const fullCss = `${baseCss}${props.isActive ? ' active' : ''}${props.isDisabled ? ' disabled' : ''}`;
-
 	return (
 		<li key={props.index} className={fullCss}>
-			<a style={props.style} onClick={props.onClick}>{props.children}</a>
+			<a style={props.style} onMouseOver={(args) => { props.onMouseOver(args); }} onMouseLeave={(args) => { props.onMouseLeave(args); }} onClick={props.onClick}>{props.children}</a>
 		</li>
 	);
 };
@@ -286,6 +304,8 @@ Page.propTypes = {
 	activeStyle: PropTypes.object,
 	style: PropTypes.object,
 	onClick:    PropTypes.func,
+	onMouseOver: PropTypes.func,
+	onMouseLeave: PropTypes.func,
 };
 
 
