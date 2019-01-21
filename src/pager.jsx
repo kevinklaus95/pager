@@ -183,7 +183,7 @@ class Pager extends React.Component {
 					index={idx}
 					isActive={isActive}
 					className="btn-numbered-page"
-					style={isActive ? this.props.activeStyle : this.state.hovered === num && isActive ? this.props.hoverStyle : this.props.style}
+					style={isActive ? this.props.activeStyle : this.state.hovered === num ? this.props.hoverStyle : this.props.style}
 					onMouseLeave={() => {this.setState({hovered: ''})}}
 					onMouseOver={() => {this.setState({hovered: num})}}
 					onClick={onClick}
