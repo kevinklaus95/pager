@@ -194,7 +194,6 @@ class Pager extends React.Component {
 
 
 	render() {
-		console.error(this.state)
 		const titles = this.getTitles.bind(this);
 		let className = "pagination";
 		if (this.props.className) {
